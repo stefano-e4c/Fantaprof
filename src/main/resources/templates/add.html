@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
+
+    <style>
+        .disabled {
+            opacity: 0.5;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f0f0f;
+        }
+    </style>
+
+    <title>Aggiungi prof</title>
+</head>
+<body class="bg-gray-800 flex justify-center w-full">
+
+<div class="flex justify-center items-center p-6 m-4 bg-gray-700 rounded-xl flex-col">
+
+    <div class="flex justify-center gap-12 items-center shadow-sm bg-gray-600 rounded-lg w-full h-10 p-6">
+        <h1 class="text-center text-white font-bold text-lg">FantaProf</h1>
+    </div>
+
+    <div class="flex justify-start items-start w-full mt-6 flex-col gap-4">
+        <form th:action="@{api/admin/add}" class="flex justify-start" method="POST">
+            <div class="flex flex-col justify-start items-center">
+                <div class="flex flex-col gap-2">
+                    <div class="rounded-lg w-full h-12 flex justify-center items-center">
+                            <span class="flex w-16 h-12 rounded-lg m-1 justify-center items-center">
+                                <span class="flex flex-row justify-center items-center gap-1 text-xs">
+                                    <input type="number" name="cost" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="C" required />
+                                </span>
+                            </span>
+                        <div class="w-full h-12 flex justify-center items-center gap-2 rounded-lg">
+                            <input type="text" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nome professore" required />
+                            <input type="submit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 bg-gray-500" value="Aggiungi" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="bg-gray-500 w-auto h-12 flex justify-start items-center gap-2 rounded-lg px-3" th:each="professor : ${professors}" th:attr="data-id=${professor.id}">
+            <h1 class="text-sm text-white font-bold" th:text="${professor.name}"></h1>
+            <button class="flex space-x-2 items-center px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md drop-shadow-md cursor-pointer duration-300 delete-order">
+                <svg class="fill-white" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20"
+                     viewBox="0 0 24 24">
+                    <path
+                            d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
