@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Controller
@@ -19,7 +20,7 @@ public class AddController {
 
     private final ProfessorService professorService;
 
-    private final HashMap<String, Integer> dataMap = new HashMap<>();
+    private final LinkedHashMap<String, Integer> dataMap = new LinkedHashMap<>();
 
     private final SimpMessagingTemplate messagingTemplate;
 
@@ -52,8 +53,9 @@ public class AddController {
         dataMap.put("Esce durante verifica", +15);
         dataMap.put("Nota di merito", +35);
         dataMap.put("Capriola", +150);
-        dataMap.put("Dimentica le verifiche", +30);
+        dataMap.put("Dimentica le verifiche il giorno del compito", +30);
         dataMap.put("Caccia nota", +25);
+        dataMap.put("Mette 10", +50);
 
         // Malus
         dataMap.put("Sbaglia", -10);

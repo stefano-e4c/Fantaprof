@@ -17,8 +17,6 @@ public class ProfessorService {
 
     private final ProfessorRepository repository;
 
-    private final Map<Long, LocalDateTime> lastUpdateMap = new ConcurrentHashMap<>();
-
     public void addProfessor(Professor professor) {
         repository.save(professor);
     }
@@ -43,19 +41,5 @@ public class ProfessorService {
             value.setScore(score);
             repository.save(value);
         });
-    }
-
-    public boolean canUpdateScore(Long professorId) {
-        LocalDateTime lastUpdate = lastUpdateMap.get(professorId);
-        if (lastUpdate == null) {
-            return true; // Se non c'è un timestamp precedente, permette l'aggiornamento
-        }
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime midnight = now.toLocalDate().atStartOfDay().plusDays(1); // Prossima mezzanotte
-        return now.isAfter(midnight); // Permette l'aggiornamento solo dopo mezzanotte
-    }
-
-    public void updateLastUpdateTimestamp(Long professorId) {
-        lastUpdateMap.put(professorId, LocalDateTime.now());
     }
 }
