@@ -21,9 +21,13 @@ public class User {
 
     private String username;
     private String password;
+    private Long scoreTot;
+    private String role;
 
-    public User(String username, String password) {
+    public User(String username, String password, Long ScoreTot, String role) {
         this.username = username;
         this.password = password;
+        this.scoreTot = ScoreTot;
+        this.role = role;
     }
 }

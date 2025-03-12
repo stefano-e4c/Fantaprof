@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
+
+    <style>
+        .disabled {
+            opacity: 0.5;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f0f0f;
+        }
+    </style>
+
+    <title>Leaderboard</title>
+</head>
+<body class="bg-gray-800 flex justify-center w-full">
+
+<!-- Leaderboard -->
+<div class="flex justify-center items-center p-8 m-6 bg-gray-800 rounded-2xl flex-col shadow-lg w-auto">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center bg-gray-700 rounded-lg w-full p-6 shadow-md">
+        <h1 class="text-center text-white font-extrabold text-xl">Leaderboard FantaProf</h1>
+    </div>
+
+    <!-- Leaderboard -->
+    <div class="flex flex-col w-full mt-6 gap-4">
+    <div class="bg-gray-600 w-full flex flex-col rounded-lg p-4 shadow-md"
+         th:each="entry, iter : ${leaderboard}">
+        <div class="flex justify-between items-center w-full">
+            <!-- Posizione in classifica -->
+            <span th:class="${iter.index == 0} ? 'text-yellow-400' :
+                      (${iter.index == 1} ? 'text-gray-300' :
+                      (${iter.index == 2} ? 'text-yellow-800' : 'text-white'))"
+                  class="text-lg font-bold">
+                [[${iter.index + 1}]]°
+            </span>
+
+            <!-- Nome Squadra -->
+            <h1 class="text-white text-md font-semibold" th:text="${entry.key}"></h1>
+
+            <!-- Punteggio -->
+            <span class="flex justify-center items-center rounded-lg bg-yellow-400 px-4 py-2 shadow-sm">
+                <h1 class="text-black text-sm font-bold" th:text="${entry.value}"></h1>
+            </span>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600 flex justify-around items-center">
+    <div class="flex justify-between items-center gap-18 px-8">
+        <!-- Icona Team -->
+        <a href="team" class="flex flex-col items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-800 w-10 h-10 rounded-full">
+            <i class="fa-solid fa-people-group text-lg text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+        </a>
+
+        <a href="leaderboard" class="flex flex-col items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-800 w-10 h-10 rounded-full">
+            <i class="fa-solid fa-trophy text-lg text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+        </a>
+
+        <!-- Icona Crea Squadra -->
+        <a href="creasquadra" class="flex flex-col items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-800 w-10 h-10 rounded-full">
+            <i class="fa-solid fa-user-plus text-lg text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+        </a>
+
+        <!-- Pulsante centrale (Aggiungi) -->
+        <div class="flex items-center justify-center">
+            <a href="add" class="flex items-center justify-center w-14 h-14 bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
+                <i class="fa-solid fa-plus text-white text-xl"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{assets/js/main.js}"></script>
+</body>
+</html>

@@ -13,7 +13,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "professors")
-public class Professors {
+public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +24,11 @@ public class Professors {
 
     private int cost;
 
-    private int points;
+    private int score;
 
-    public Professors(String name, int cost, int points) {
+    public Professor(String name, int cost, int points) {
         this.name = name;
         this.cost = cost;
-        this.points = points;
+        this.score = points;
     }
 }

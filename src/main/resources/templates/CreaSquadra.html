@@ -23,75 +23,58 @@
         }
     </style>
 
-    <title>Aggiungi prof</title>
+    <title>CreaSquadra</title>
 </head>
 <body class="bg-gray-800 flex justify-center w-full">
 
 <div class="flex flex-col items-center p-6 m-4 bg-gray-800 rounded-xl shadow-lg w-full max-w-lg">
 
     <!-- Intestazione -->
-    <div class="flex justify-center items-center bg-gray-700 rounded-lg w-full px-6 py-3 shadow-md">
+    <div class="flex justify-between items-center bg-gray-700 rounded-lg w-full px-6 py-3 shadow-md">
         <h1 class="text-white font-bold text-lg">FantaProf</h1>
+        <div class="flex items-center gap-2 text-yellow-400">
+            <i class="fa-solid fa-coins text-lg"></i>
+            <p id="credit" class="text-white font-semibold"></p>
+        </div>
     </div>
 
-    <!-- Form Aggiunta Professore -->
-    <form th:action="@{api/admin/add}" method="POST" class="w-full mt-6">
+    <!-- Form Creazione Squadra -->
+    <form th:action="@{/api/team/add}" method="POST" class="w-full mt-6">
         <div class="flex flex-col gap-4">
 
+            <!-- Nome Squadra e Pulsante Crea -->
             <div class="flex gap-2">
-                <input type="number" name="cost" placeholder="C"
-                       class="w-20 p-2.5 rounded-lg border border-gray-500 bg-gray-700 text-white text-center focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                       required />
-
-                <input type="text" name="name" placeholder="Nome professore"
+                <input type="text" name="name" placeholder="Nome Squadra"
                        class="w-full p-2.5 rounded-lg border border-gray-500 bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                        required />
-
-                <input type="submit" value="Aggiungi"
-                       class="cursor-pointer bg-gray-600 text-white px-4 py-2 rounded-lg border border-gray-500 hover:bg-gray-500 transition" />
+                <input type="submit" id="submitButton" value="Crea" disabled
+                       class="cursor-pointer bg-gray-600 text-white px-4 py-2 rounded-lg border border-gray-500 hover:bg-gray-500 transition disabled:opacity-50 disabled:cursor-not-allowed" />
             </div>
 
-        </div>
-    </form>
-
-    <!-- Lista Professori -->
-    <div class="w-full mt-6">
-        <h2 class="text-white font-semibold text-md">Professori:</h2>
-        <div class="flex flex-col gap-3">
-            <div class="bg-gray-700 p-3 rounded-lg flex justify-between items-center border border-gray-600"
-                 th:each="professor : ${professors}" th:attr="data-id=${professor.id}">
-                <span class="text-white font-medium" th:text="${professor.name}"></span>
-                <div class="flex items-center gap-3">
-                    <button class="px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md shadow cursor-pointer duration-300 delete-prof">
-                        <svg class="fill-white" width="20" height="20" viewBox="0 0 24 24">
-                            <path
-                                    d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z">
-                            </path>
-                        </svg>
-                    </button>
-                    <button class="px-3 py-2 bg-blue-500 hover:bg-blue-800 rounded-md shadow cursor-pointer duration-300 updateprofscore">
-                        <i class="fa-solid fa-pencil text-white text-lg"></i>
-                    </button>
+            <!-- Selezione Professori -->
+            <div class="flex flex-col gap-3">
+                <h2 class="text-white font-semibold text-md">Seleziona Professori:</h2>
+                <div class="grid grid-cols-1 gap-2">
+                    <div class="bg-gray-700 p-3 rounded-lg flex justify-between items-center border border-gray-600"
+                         th:each="professor : ${professors}" th:attr="data-id=${professor.id}">
+                        <span class="text-white font-medium" th:text="${professor.name}"></span>
+                        <div class="flex items-center gap-3">
+                            <input name="selectedItems" type="checkbox" th:value="${professor.id}"
+                                   th:data-credit="${professor.cost}"
+                                   class="w-5 h-5 text-blue-500 border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500">
+                            <button type="button"
+                                    class="bg-yellow-500 p-2 rounded-md shadow hover:bg-yellow-400 transition capitano-btn">
+                                <i class="fa-solid fa-crown text-white text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Sezione punteggi (nascosta di default) -->
-    <div class="hidden flex flex-col items-center p-4 my-4 bg-gray-700 rounded-xl w-full" id="scores">
-        <h2 class="text-white font-semibold text-md">Punteggi:</h2>
-        <div class="bg-gray-400 w-full p-4 flex flex-col gap-2 rounded-xl">
-            <div th:each="entry : ${dataMap}" class="flex justify-between items-center bg-gray-500 p-3 rounded-lg">
-                <span class="text-white font-medium" th:text="${entry.key}"></span>
-                <button
-                        class="px-3 py-2 text-white font-semibold rounded-md shadow cursor-pointer duration-300 update-score"
-                        th:text="${entry.value}"
-                        th:classappend="${entry.value < 0} ? 'bg-red-500 hover:bg-red-800' : 'bg-green-500 hover:bg-green-800'"
-                        th:attr="data-score=${entry.value}">
-                </button>
-            </div>
         </div>
-    </div>
+        <input type="hidden" name="capitanoId" id="capitanoId" value="">
+    </form>
+
 </div>
 
 <div class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600 flex justify-around items-center">
@@ -119,7 +102,6 @@
     </div>
 </div>
 
-
-<script th:src="@{assets/js/main.js}"></script>
+    <script th:src="@{assets/js/main.js}"></script>
 </body>
 </html>

@@ -22,12 +22,14 @@ public class Team {
 
     private String name;
 
-    @Convert(converter = UserBase64Converter.class)
-    @Column(columnDefinition = "TEXT")
-    private User user;
+    private Long userId;
+    private Long profId;
+    private boolean captain;
 
-    public Team(String name, User user) {
+    public Team(String name, Long userId, Long profId, boolean captain) {
         this.name = name;
-        this.user = user;
+        this.userId = userId;
+        this.profId = profId;
+        this.captain = captain;
     }
 }
