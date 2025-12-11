@@ -1,0 +1,40 @@
+{
+  "name": "fantaprof-webapp",
+  "version": "2.0.0",
+  "description": "FantaProf - Il fantasy game dei professori",
+  "main": "server/index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "node server/index.js",
+    "start": "node server/index.js",
+    "client": "cd client && npm run dev",
+    "build": "cd client && npm install && npm run build",
+    "install-all": "npm install && cd client && npm install",
+    "dev-all": "concurrently \"npm run dev\" \"npm run client\"",
+    "postinstall": "npm run build"
+  },
+  "keywords": [
+    "fantasy",
+    "game",
+    "school",
+    "professors"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^12.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "jsonwebtoken": "^9.0.3",
+    "socket.io": "^4.8.1",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
