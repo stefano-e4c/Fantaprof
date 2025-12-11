@@ -33,19 +33,23 @@ const Login = () => {
   return (
     <div style={{
       minHeight: '100vh',
+      minHeight: '100dvh', /* Dynamic viewport height for mobile browsers */
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '20px',
-      background: 'linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%)'
+      padding: '16px',
+      paddingTop: 'env(safe-area-inset-top, 16px)',
+      paddingBottom: 'env(safe-area-inset-bottom, 16px)',
+      background: 'linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%)',
+      overflow: 'auto'
     }}>
-      {/* Background decorations */}
+      {/* Background decorations - smaller on mobile */}
       <div style={{
         position: 'fixed',
         top: '-20%',
         right: '-10%',
-        width: '500px',
-        height: '500px',
+        width: 'min(500px, 80vw)',
+        height: 'min(500px, 80vw)',
         background: 'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%)',
         borderRadius: '50%',
         filter: 'blur(60px)',
@@ -55,8 +59,8 @@ const Login = () => {
         position: 'fixed',
         bottom: '-20%',
         left: '-10%',
-        width: '500px',
-        height: '500px',
+        width: 'min(500px, 80vw)',
+        height: 'min(500px, 80vw)',
         background: 'radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, transparent 70%)',
         borderRadius: '50%',
         filter: 'blur(60px)',
@@ -69,7 +73,8 @@ const Login = () => {
         transition={{ duration: 0.6 }}
         style={{
           width: '100%',
-          maxWidth: '420px'
+          maxWidth: '420px',
+          margin: 'auto'
         }}
       >
         {/* Logo */}
@@ -79,14 +84,14 @@ const Login = () => {
           transition={{ delay: 0.2, type: 'spring' }}
           style={{
             textAlign: 'center',
-            marginBottom: '40px'
+            marginBottom: 'clamp(24px, 5vh, 40px)'
           }}
         >
-          <span style={{ fontSize: '80px', display: 'block' }} className="animate-float">🎓</span>
+          <span style={{ fontSize: 'clamp(56px, 15vw, 80px)', display: 'block' }} className="animate-float">🎓</span>
           <h1 style={{
-            fontSize: '42px',
+            fontSize: 'clamp(28px, 8vw, 42px)',
             fontWeight: '700',
-            marginTop: '16px',
+            marginTop: '12px',
             background: 'var(--gradient-rainbow)',
             backgroundSize: '200% 200%',
             WebkitBackgroundClip: 'text',
@@ -95,7 +100,7 @@ const Login = () => {
           }}>
             FantaProf
           </h1>
-          <p style={{ color: 'var(--text-muted)', marginTop: '8px' }}>
+          <p style={{ color: 'var(--text-muted)', marginTop: '8px', fontSize: 'clamp(13px, 3.5vw, 16px)' }}>
             Il fantasy game dei professori! 📚
           </p>
         </motion.div>
@@ -106,7 +111,7 @@ const Login = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
-          style={{ padding: '32px' }}
+          style={{ padding: 'clamp(20px, 5vw, 32px)' }}
         >
           {/* Tab switch */}
           <div style={{
@@ -240,8 +245,8 @@ const Login = () => {
           style={{
             display: 'flex',
             justifyContent: 'center',
-            gap: '24px',
-            marginTop: '32px',
+            gap: 'clamp(8px, 3vw, 24px)',
+            marginTop: 'clamp(20px, 4vh, 32px)',
             flexWrap: 'wrap'
           }}
         >
@@ -250,10 +255,11 @@ const Login = () => {
               key={i}
               style={{
                 background: 'rgba(255,255,255,0.05)',
-                padding: '8px 16px',
+                padding: 'clamp(6px, 2vw, 8px) clamp(10px, 3vw, 16px)',
                 borderRadius: '20px',
-                fontSize: '13px',
-                color: 'var(--text-muted)'
+                fontSize: 'clamp(11px, 3vw, 13px)',
+                color: 'var(--text-muted)',
+                whiteSpace: 'nowrap'
               }}
             >
               {feature}

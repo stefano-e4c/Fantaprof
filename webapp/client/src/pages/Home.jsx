@@ -44,30 +44,36 @@ const Home = () => {
     <div className="page">
       <Header title="FantaProf" />
 
-      <div className="container" style={{ paddingTop: '24px' }}>
+      <div className="container" style={{ paddingTop: 'clamp(16px, 4vw, 24px)' }}>
         {/* Welcome Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="card"
           style={{
-            padding: '24px',
+            padding: 'clamp(16px, 4vw, 24px)',
             background: 'var(--gradient-glow), var(--bg-card)',
-            marginBottom: '24px'
+            marginBottom: 'clamp(16px, 4vw, 24px)'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <span style={{ fontSize: '48px' }}>{user?.avatar || '🎓'}</span>
-            <div>
-              <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Bentornato,</p>
-              <h2 style={{ fontSize: '24px', fontWeight: '700' }}>{user?.username}!</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(12px, 3vw, 16px)' }}>
+            <span style={{ fontSize: 'clamp(36px, 10vw, 48px)' }}>{user?.avatar || '🎓'}</span>
+            <div style={{ minWidth: 0, flex: 1 }}>
+              <p style={{ color: 'var(--text-muted)', fontSize: 'clamp(12px, 3vw, 14px)' }}>Bentornato,</p>
+              <h2 style={{
+                fontSize: 'clamp(18px, 5vw, 24px)',
+                fontWeight: '700',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}>{user?.username}!</h2>
             </div>
           </div>
 
           {teams.length > 0 && (
             <div style={{
-              marginTop: '20px',
-              padding: '16px',
+              marginTop: 'clamp(12px, 3vw, 20px)',
+              padding: 'clamp(12px, 3vw, 16px)',
               background: 'rgba(139, 92, 246, 0.2)',
               borderRadius: '12px',
               display: 'flex',
@@ -75,9 +81,9 @@ const Home = () => {
               justifyContent: 'space-between'
             }}>
               <div>
-                <p style={{ color: 'var(--text-muted)', fontSize: '12px' }}>Punteggio Totale</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: 'clamp(10px, 2.5vw, 12px)' }}>Punteggio Totale</p>
                 <p style={{
-                  fontSize: '32px',
+                  fontSize: 'clamp(24px, 7vw, 32px)',
                   fontWeight: '700',
                   background: 'var(--gradient-primary)',
                   WebkitBackgroundClip: 'text',
@@ -86,7 +92,7 @@ const Home = () => {
                   {totalScore}
                 </p>
               </div>
-              <Sparkles size={40} style={{ color: 'var(--primary-light)', opacity: 0.5 }} />
+              <Sparkles size={32} className="hide-mobile" style={{ color: 'var(--primary-light)', opacity: 0.5 }} />
             </div>
           )}
         </motion.div>
@@ -99,44 +105,46 @@ const Home = () => {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '12px',
-            marginBottom: '24px'
+            gap: 'clamp(8px, 2vw, 12px)',
+            marginBottom: 'clamp(16px, 4vw, 24px)'
           }}
         >
           <button
             onClick={() => navigate('/create-team')}
             className="card"
             style={{
-              padding: '20px',
+              padding: 'clamp(14px, 4vw, 20px)',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '8px',
+              gap: 'clamp(6px, 2vw, 8px)',
               border: '2px dashed var(--primary)',
               background: 'rgba(139, 92, 246, 0.1)',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              minHeight: '80px'
             }}
           >
-            <Plus size={28} style={{ color: 'var(--primary)' }} />
-            <span style={{ fontWeight: '600', color: 'var(--primary)' }}>Crea Squadra</span>
+            <Plus size={24} style={{ color: 'var(--primary)' }} />
+            <span style={{ fontWeight: '600', color: 'var(--primary)', fontSize: 'clamp(12px, 3vw, 14px)' }}>Crea Squadra</span>
           </button>
 
           <button
             onClick={() => navigate('/leagues')}
             className="card"
             style={{
-              padding: '20px',
+              padding: 'clamp(14px, 4vw, 20px)',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '8px',
+              gap: 'clamp(6px, 2vw, 8px)',
               border: '2px dashed var(--secondary)',
               background: 'rgba(236, 72, 153, 0.1)',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              minHeight: '80px'
             }}
           >
-            <Users size={28} style={{ color: 'var(--secondary)' }} />
-            <span style={{ fontWeight: '600', color: 'var(--secondary)' }}>Unisciti a Lega</span>
+            <Users size={24} style={{ color: 'var(--secondary)' }} />
+            <span style={{ fontWeight: '600', color: 'var(--secondary)', fontSize: 'clamp(12px, 3vw, 14px)' }}>Unisciti a Lega</span>
           </button>
         </motion.div>
 
@@ -150,9 +158,9 @@ const Home = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginBottom: '16px'
+            marginBottom: 'clamp(12px, 3vw, 16px)'
           }}>
-            <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Le Mie Squadre</h3>
+            <h3 style={{ fontSize: 'clamp(16px, 4vw, 18px)', fontWeight: '600' }}>Le Mie Squadre</h3>
             {teams.length > 0 && (
               <span className="badge badge-primary">{teams.length}</span>
             )}
@@ -172,7 +180,7 @@ const Home = () => {
               </button>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(8px, 2vw, 12px)' }}>
               {teams.map((team, i) => (
                 <motion.div
                   key={team.id}
@@ -184,48 +192,62 @@ const Home = () => {
                     to={`/team/${team.id}`}
                     className="card"
                     style={{
-                      padding: '16px',
+                      padding: 'clamp(12px, 3vw, 16px)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       textDecoration: 'none',
-                      color: 'inherit'
+                      color: 'inherit',
+                      gap: '12px'
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', minWidth: 0, flex: 1 }}>
                       <div style={{
-                        width: '48px',
-                        height: '48px',
+                        width: 'clamp(40px, 10vw, 48px)',
+                        height: 'clamp(40px, 10vw, 48px)',
                         borderRadius: '12px',
                         background: 'var(--gradient-primary)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontSize: '24px'
+                        fontSize: 'clamp(18px, 5vw, 24px)',
+                        flexShrink: 0
                       }}>
                         ⚽
                       </div>
-                      <div>
-                        <h4 style={{ fontWeight: '600' }}>{team.name}</h4>
+                      <div style={{ minWidth: 0 }}>
+                        <h4 style={{
+                          fontWeight: '600',
+                          fontSize: 'clamp(14px, 3.5vw, 16px)',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap'
+                        }}>{team.name}</h4>
                         {team.league_name && (
-                          <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                          <p style={{
+                            fontSize: 'clamp(10px, 2.5vw, 12px)',
+                            color: 'var(--text-muted)',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
+                          }}>
                             {team.league_name}
                           </p>
                         )}
                       </div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', flexShrink: 0 }}>
                       <div style={{ textAlign: 'right' }}>
                         <p style={{
-                          fontSize: '20px',
+                          fontSize: 'clamp(16px, 4vw, 20px)',
                           fontWeight: '700',
                           color: team.totalScore >= 0 ? 'var(--success)' : 'var(--danger)'
                         }}>
                           {team.totalScore}
                         </p>
-                        <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>punti</p>
+                        <p style={{ fontSize: 'clamp(9px, 2.5vw, 11px)', color: 'var(--text-muted)' }}>punti</p>
                       </div>
-                      <ChevronRight size={20} style={{ color: 'var(--text-muted)' }} />
+                      <ChevronRight size={18} style={{ color: 'var(--text-muted)' }} />
                     </div>
                   </Link>
                 </motion.div>
@@ -240,38 +262,54 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            style={{ marginTop: '32px' }}
+            style={{ marginTop: 'clamp(20px, 5vw, 32px)' }}
           >
             <div style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              marginBottom: '16px'
+              marginBottom: 'clamp(12px, 3vw, 16px)'
             }}>
-              <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Le Mie Leghe</h3>
-              <Link to="/leagues" style={{ color: 'var(--primary)', textDecoration: 'none', fontSize: '14px' }}>
+              <h3 style={{ fontSize: 'clamp(16px, 4vw, 18px)', fontWeight: '600' }}>Le Mie Leghe</h3>
+              <Link to="/leagues" style={{ color: 'var(--primary)', textDecoration: 'none', fontSize: 'clamp(12px, 3vw, 14px)' }}>
                 Vedi tutte
               </Link>
             </div>
 
-            <div style={{ display: 'flex', gap: '12px', overflowX: 'auto', paddingBottom: '8px' }}>
+            <div className="scroll-x-mobile" style={{
+              display: 'flex',
+              gap: 'clamp(8px, 2vw, 12px)',
+              overflowX: 'auto',
+              paddingBottom: '8px',
+              marginLeft: '-12px',
+              marginRight: '-12px',
+              paddingLeft: '12px',
+              paddingRight: '12px'
+            }}>
               {leagues.slice(0, 3).map((league, i) => (
                 <Link
                   key={league.id}
                   to={`/league/${league.id}`}
                   className="card"
                   style={{
-                    minWidth: '200px',
-                    padding: '16px',
+                    minWidth: 'clamp(160px, 45vw, 200px)',
+                    padding: 'clamp(12px, 3vw, 16px)',
                     textDecoration: 'none',
-                    color: 'inherit'
+                    color: 'inherit',
+                    flexShrink: 0
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <Trophy size={18} style={{ color: 'var(--warning)' }} />
-                    <span style={{ fontWeight: '600', fontSize: '14px' }}>{league.name}</span>
+                    <Trophy size={16} style={{ color: 'var(--warning)' }} />
+                    <span style={{
+                      fontWeight: '600',
+                      fontSize: 'clamp(12px, 3vw, 14px)',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap'
+                    }}>{league.name}</span>
                   </div>
-                  <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                  <p style={{ fontSize: 'clamp(10px, 2.5vw, 12px)', color: 'var(--text-muted)' }}>
                     {league.member_count} membri
                   </p>
                 </Link>

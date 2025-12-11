@@ -5,31 +5,33 @@ import { useAuth } from '../context/AuthContext';
 const BottomNav = () => {
   const { isAdmin } = useAuth();
 
+  const iconSize = 22;
+
   return (
     <nav className="bottom-nav">
       <NavLink to="/" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <Home size={24} />
+        <Home size={iconSize} />
         <span>Home</span>
       </NavLink>
 
       <NavLink to="/leaderboard" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <Trophy size={24} />
+        <Trophy size={iconSize} />
         <span>Classifica</span>
       </NavLink>
 
       <NavLink to="/leagues" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <Users size={24} />
+        <Users size={iconSize} />
         <span>Leghe</span>
       </NavLink>
 
       <NavLink to="/achievements" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <Award size={24} />
+        <Award size={iconSize} />
         <span>Badge</span>
       </NavLink>
 
       {isAdmin && (
         <NavLink to="/admin" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <Settings size={24} />
+          <Settings size={iconSize} />
           <span>Admin</span>
         </NavLink>
       )}

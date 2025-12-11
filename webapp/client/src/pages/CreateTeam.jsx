@@ -104,10 +104,10 @@ const CreateTeam = () => {
   }
 
   return (
-    <div className="page" style={{ paddingBottom: '200px' }}>
+    <div className="page" style={{ paddingBottom: 'clamp(160px, 25vh, 200px)' }}>
       <Header title="Crea Squadra" />
 
-      <div className="container" style={{ paddingTop: '24px' }}>
+      <div className="container" style={{ paddingTop: 'clamp(16px, 4vw, 24px)' }}>
         {/* Back button */}
         <button
           onClick={() => navigate(-1)}
@@ -119,10 +119,12 @@ const CreateTeam = () => {
             alignItems: 'center',
             gap: '8px',
             cursor: 'pointer',
-            marginBottom: '24px'
+            marginBottom: 'clamp(16px, 4vw, 24px)',
+            padding: '8px 0',
+            fontSize: 'clamp(13px, 3.5vw, 14px)'
           }}
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={18} />
           Indietro
         </button>
 
@@ -131,9 +133,9 @@ const CreateTeam = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="card"
-          style={{ padding: '20px', marginBottom: '16px' }}
+          style={{ padding: 'clamp(14px, 4vw, 20px)', marginBottom: 'clamp(12px, 3vw, 16px)' }}
         >
-          <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>
+          <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
             Nome Squadra
           </label>
           <input
@@ -153,10 +155,10 @@ const CreateTeam = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="card"
-            style={{ padding: '20px', marginBottom: '16px' }}
+            style={{ padding: 'clamp(14px, 4vw, 20px)', marginBottom: 'clamp(12px, 3vw, 16px)' }}
           >
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>
-              <Users size={18} style={{ display: 'inline', marginRight: '8px' }} />
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+              <Users size={16} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} />
               Lega (opzionale)
             </label>
             <select
@@ -180,22 +182,22 @@ const CreateTeam = () => {
           transition={{ delay: 0.2 }}
           className="card"
           style={{
-            padding: '20px',
-            marginBottom: '24px',
+            padding: 'clamp(14px, 4vw, 20px)',
+            marginBottom: 'clamp(16px, 4vw, 24px)',
             background: remainingBudget < 10 ? 'rgba(239, 68, 68, 0.2)' : 'var(--bg-card)'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <Coins size={24} style={{ color: 'var(--warning)' }} />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)' }}>
+              <Coins size={20} style={{ color: 'var(--warning)', flexShrink: 0 }} />
               <div>
-                <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Budget Rimanente</p>
-                <p style={{ fontSize: '24px', fontWeight: '700' }}>{remainingBudget} crediti</p>
+                <p style={{ fontSize: 'clamp(10px, 2.5vw, 12px)', color: 'var(--text-muted)' }}>Budget Rimanente</p>
+                <p style={{ fontSize: 'clamp(18px, 5vw, 24px)', fontWeight: '700' }}>{remainingBudget} crediti</p>
               </div>
             </div>
-            <div style={{ textAlign: 'right' }}>
-              <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Selezionati</p>
-              <p style={{ fontSize: '20px', fontWeight: '600' }}>
+            <div style={{ textAlign: 'right', flexShrink: 0 }}>
+              <p style={{ fontSize: 'clamp(10px, 2.5vw, 12px)', color: 'var(--text-muted)' }}>Selezionati</p>
+              <p style={{ fontSize: 'clamp(16px, 4vw, 20px)', fontWeight: '600' }}>
                 <span style={{ color: selectedProfs.length === TEAM_SIZE ? 'var(--success)' : 'inherit' }}>
                   {selectedProfs.length}
                 </span>
@@ -206,8 +208,8 @@ const CreateTeam = () => {
 
           {/* Budget bar */}
           <div style={{
-            marginTop: '16px',
-            height: '8px',
+            marginTop: 'clamp(12px, 3vw, 16px)',
+            height: '6px',
             background: 'rgba(255,255,255,0.1)',
             borderRadius: '4px',
             overflow: 'hidden'
@@ -225,11 +227,11 @@ const CreateTeam = () => {
         </motion.div>
 
         {/* Professors Grid */}
-        <h3 style={{ marginBottom: '16px', fontWeight: '600' }}>Seleziona i Professori</h3>
+        <h3 style={{ marginBottom: 'clamp(12px, 3vw, 16px)', fontWeight: '600', fontSize: 'clamp(16px, 4vw, 18px)' }}>Seleziona i Professori</h3>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
-          gap: '12px'
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(140px, 45vw), 1fr))',
+          gap: 'clamp(8px, 2vw, 12px)'
         }}>
           <AnimatePresence>
             {professors.map((prof, i) => {
@@ -246,7 +248,7 @@ const CreateTeam = () => {
                   className="card"
                   onClick={() => canAfford && toggleProfessor(prof.id)}
                   style={{
-                    padding: '16px',
+                    padding: 'clamp(10px, 3vw, 16px)',
                     cursor: canAfford ? 'pointer' : 'not-allowed',
                     opacity: canAfford ? 1 : 0.5,
                     border: isSelected ? '2px solid var(--primary)' : '1px solid var(--border)',
@@ -257,35 +259,49 @@ const CreateTeam = () => {
                   {isSelected && (
                     <div style={{
                       position: 'absolute',
-                      top: '8px',
-                      right: '8px',
+                      top: '6px',
+                      right: '6px',
                       background: 'var(--primary)',
                       borderRadius: '50%',
-                      width: '20px',
-                      height: '20px',
+                      width: '18px',
+                      height: '18px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center'
                     }}>
-                      <Check size={14} />
+                      <Check size={12} />
                     </div>
                   )}
 
                   <div style={{ textAlign: 'center' }}>
-                    <span style={{ fontSize: '36px', display: 'block' }}>{prof.avatar}</span>
-                    <h4 style={{ fontSize: '14px', fontWeight: '600', marginTop: '8px' }}>{prof.name}</h4>
-                    <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{prof.subject}</p>
+                    <span style={{ fontSize: 'clamp(28px, 8vw, 36px)', display: 'block' }}>{prof.avatar}</span>
+                    <h4 style={{
+                      fontSize: 'clamp(12px, 3vw, 14px)',
+                      fontWeight: '600',
+                      marginTop: '6px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap'
+                    }}>{prof.name}</h4>
+                    <p style={{
+                      fontSize: 'clamp(9px, 2.5vw, 11px)',
+                      color: 'var(--text-muted)',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap'
+                    }}>{prof.subject}</p>
                     <div style={{
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '8px',
-                      marginTop: '8px'
+                      gap: 'clamp(4px, 1vw, 8px)',
+                      marginTop: '6px',
+                      flexWrap: 'wrap'
                     }}>
-                      <span className="badge badge-warning" style={{ fontSize: '11px' }}>
-                        {prof.cost} crediti
+                      <span className="badge badge-warning" style={{ fontSize: 'clamp(9px, 2.5vw, 11px)', padding: '2px 6px' }}>
+                        {prof.cost} cr
                       </span>
-                      <span className="badge badge-success" style={{ fontSize: '11px' }}>
+                      <span className="badge badge-success" style={{ fontSize: 'clamp(9px, 2.5vw, 11px)', padding: '2px 6px' }}>
                         {prof.score} pts
                       </span>
                     </div>
@@ -297,13 +313,13 @@ const CreateTeam = () => {
                           setCaptain(isCaptain ? null : prof.id);
                         }}
                         style={{
-                          marginTop: '12px',
-                          padding: '8px 12px',
+                          marginTop: 'clamp(8px, 2vw, 12px)',
+                          padding: 'clamp(6px, 2vw, 8px) clamp(8px, 2vw, 12px)',
                           borderRadius: '8px',
                           border: 'none',
                           background: isCaptain ? 'var(--gradient-secondary)' : 'rgba(255,255,255,0.1)',
                           color: 'white',
-                          fontSize: '12px',
+                          fontSize: 'clamp(10px, 2.5vw, 12px)',
                           fontWeight: '600',
                           cursor: 'pointer',
                           display: 'flex',
@@ -313,7 +329,7 @@ const CreateTeam = () => {
                           width: '100%'
                         }}
                       >
-                        <Crown size={14} />
+                        <Crown size={12} />
                         {isCaptain ? 'Capitano!' : 'Fai Capitano'}
                       </button>
                     )}
@@ -331,7 +347,8 @@ const CreateTeam = () => {
         bottom: 0,
         left: 0,
         right: 0,
-        padding: '20px',
+        padding: 'clamp(12px, 3vw, 20px)',
+        paddingBottom: 'max(clamp(12px, 3vw, 20px), env(safe-area-inset-bottom))',
         background: 'rgba(15, 15, 26, 0.95)',
         backdropFilter: 'blur(20px)',
         borderTop: '1px solid var(--border)'
@@ -341,29 +358,31 @@ const CreateTeam = () => {
             <div style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '8px',
-              marginBottom: '12px',
-              justifyContent: 'center'
+              gap: '6px',
+              marginBottom: 'clamp(8px, 2vw, 12px)',
+              justifyContent: 'center',
+              flexWrap: 'wrap'
             }}>
-              <Crown size={16} style={{ color: 'var(--warning)' }} />
-              <span style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+              <Crown size={14} style={{ color: 'var(--warning)' }} />
+              <span style={{ fontSize: 'clamp(11px, 3vw, 13px)', color: 'var(--text-muted)', textAlign: 'center' }}>
                 Capitano: <strong style={{ color: 'white' }}>
                   {professors.find(p => p.id === captain)?.name}
-                </strong> (punti x2!)
+                </strong> (x2!)
               </span>
             </div>
           ) : selectedProfs.length === TEAM_SIZE && (
             <div style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '8px',
-              marginBottom: '12px',
+              gap: '6px',
+              marginBottom: 'clamp(8px, 2vw, 12px)',
               justifyContent: 'center',
-              color: 'var(--warning)'
+              color: 'var(--warning)',
+              flexWrap: 'wrap'
             }}>
-              <Crown size={16} />
-              <span style={{ fontSize: '13px', fontWeight: '600' }}>
-                Clicca "Fai Capitano" su un professore!
+              <Crown size={14} />
+              <span style={{ fontSize: 'clamp(11px, 3vw, 13px)', fontWeight: '600', textAlign: 'center' }}>
+                Clicca "Fai Capitano" su un prof!
               </span>
             </div>
           )}
@@ -372,7 +391,7 @@ const CreateTeam = () => {
             onClick={handleSubmit}
             disabled={selectedProfs.length !== TEAM_SIZE || !captain || !teamName.trim() || submitting}
             className="btn btn-primary"
-            style={{ width: '100%', padding: '16px' }}
+            style={{ width: '100%', padding: 'clamp(12px, 3vw, 16px)', fontSize: 'clamp(13px, 3.5vw, 15px)' }}
           >
             {submitting ? 'Creazione...' :
               !teamName.trim() ? 'Inserisci nome squadra' :
