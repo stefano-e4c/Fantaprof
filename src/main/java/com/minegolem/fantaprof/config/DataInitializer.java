@@ -17,16 +17,12 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         var existingAdmin = userRepository.findByUsername("admin");
-        if (existingAdmin.isEmpty()) {
-            User admin = new User("admin", "admin", 0L, "ADMIN");
-            userRepository.save(admin);
-            log.info("Admin user created: admin/admin");
-        } else {
-            User admin = existingAdmin.get();
-            admin.setPassword("admin");
-            admin.setRole("ADMIN");
-            userRepository.save(admin);
-            log.info("Admin user updated: admin/admin");
+        if (existingAdmin.isPresent()) {
+            userRepository.delete(existingAdmin.get());
+            log.info("Deleted existing admin user");
         }
+        User admin = new User("admin", "admin", 0L, "ADMIN");
+        userRepository.save(admin);
+        log.info("Admin user created: admin/admin");
     }
 }
