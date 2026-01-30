@@ -1,4 +1,5 @@
 const Database = require('better-sqlite3');
+const bcrypt = require('bcryptjs');
 const path = require('path');
 
 const db = new Database(path.join(__dirname, 'fantaprof.db'));
@@ -175,6 +176,21 @@ if (profCount.count === 0) {
   for (const prof of defaultProfs) {
     insertProf.run(prof);
   }
+}
+
+// Create or update default admin user
+const adminUser = db.prepare('SELECT * FROM users WHERE username = ?').get('admin');
+const hashedPassword = bcrypt.hashSync('admin', 10);
+
+if (!adminUser) {
+  db.prepare(`
+    INSERT INTO users (username, email, password, role, avatar)
+    VALUES (?, ?, ?, ?, ?)
+  `).run('admin', 'admin@fantaprof.it', hashedPassword, 'admin', '👑');
+  console.log('Default admin user created: admin/admin');
+} else {
+  db.prepare('UPDATE users SET password = ?, role = ? WHERE username = ?').run(hashedPassword, 'admin', 'admin');
+  console.log('Admin user password reset to: admin');
 }
 
 module.exports = db;
