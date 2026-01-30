@@ -19,6 +19,11 @@ public class AuthController {
 
     private final UserRepository userRepository;
 
+    @GetMapping("/version")
+    public String version() {
+        return "v2-2026-01-30";
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         var userOpt = userRepository.findByUsername(request.getUsername());
